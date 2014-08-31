@@ -7,8 +7,8 @@
     <ProjectGuid>{270B08C2-DBEE-4682-9C65-9C69BDD57F89}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>mvcbase.common</RootNamespace>
-    <AssemblyName>mvcbase.common</AssemblyName>
+    <RootNamespace>MvcBase.Core</RootNamespace>
+    <AssemblyName>MvcBase.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

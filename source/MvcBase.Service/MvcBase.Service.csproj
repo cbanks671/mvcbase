@@ -7,8 +7,8 @@
     <ProjectGuid>{DB07178F-637F-4EFA-A5BD-E55B91B7A69D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>mvcbase.service</RootNamespace>
-    <AssemblyName>mvcbase.service</AssemblyName>
+    <RootNamespace>MvcBase.Service</RootNamespace>
+    <AssemblyName>MvcBase.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

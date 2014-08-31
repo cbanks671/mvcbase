@@ -7,8 +7,8 @@
     <ProjectGuid>{577739F4-2317-4A6B-A6FC-BA81A6FEB19F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>mvcbase.web.core</RootNamespace>
-    <AssemblyName>mvcbase.web.core</AssemblyName>
+    <RootNamespace>MvcBase.Web.Core</RootNamespace>
+    <AssemblyName>MvcBase.Web.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

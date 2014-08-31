@@ -6,9 +6,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using mvcbase.web.ui.Models;
+using MvcBase.web.ui.Models;
 
-namespace mvcbase.web.ui.Controllers
+namespace MvcBase.web.ui.Controllers
 {
     [Authorize]
     public class ManageController : Controller

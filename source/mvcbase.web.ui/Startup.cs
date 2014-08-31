@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(MvcBase.web.ui.Startup))]
-namespace MvcBase.web.ui
+[assembly: OwinStartupAttribute(typeof(MvcBase.Web.UI.Startup))]
+namespace MvcBase.Web.UI
 {
     public partial class Startup
     {

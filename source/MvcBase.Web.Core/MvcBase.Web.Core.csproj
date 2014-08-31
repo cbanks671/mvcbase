@@ -30,8 +30,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PagedList">
+      <HintPath>..\..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,8 +51,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ActionFilters\AntiForgeryTokenFilterProvider .cs" />
+    <Compile Include="ActionFilters\CompressResponseAttribute.cs" />
+    <Compile Include="ActionFilters\SocialGoalAuthorizeAttribute.cs" />
+    <Compile Include="Authentication\DefaultFormsAuthentication.cs" />
+    <Compile Include="Authentication\IFormsAuthentication.cs" />
+    <Compile Include="Authentication\UserAuthenticationTicketBuilder.cs" />
+    <Compile Include="AutoMapperConverters\PagedListConverter.cs" />
+    <Compile Include="Extensions\ControllerExtensions.cs" />
+    <Compile Include="Extensions\HtmlExtensions.cs" />
+    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
+    <Compile Include="Extensions\SelectListEnumExtensions.cs" />
+    <Compile Include="Extensions\SelectListExtensions.cs" />
+    <Compile Include="Helpers\BaseHtmlHelper.cs" />
+    <Compile Include="Helpers\UserHtmlHelper.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\MvcBaseUser.cs" />
+    <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MvcBase.Core\MvcBase.Core.csproj">
+      <Project>{270b08c2-dbee-4682-9c65-9c69bdd57f89}</Project>
+      <Name>MvcBase.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcBase.Model\MvcBase.Model.csproj">
+      <Project>{a4e6f99d-ce69-4ce8-b120-3677e3facd29}</Project>
+      <Name>MvcBase.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

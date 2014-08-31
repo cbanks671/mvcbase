@@ -30,6 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,8 +48,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SecurityTockenService.cs" />
+    <Compile Include="UserProfileService.cs" />
+    <Compile Include="UserService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MvcBase.Core\MvcBase.Core.csproj">
+      <Project>{270b08c2-dbee-4682-9c65-9c69bdd57f89}</Project>
+      <Name>MvcBase.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcBase.Data\MvcBase.Data.csproj">
+      <Project>{c6cf7ef1-27ec-449c-96e6-3f812bfb39ab}</Project>
+      <Name>MvcBase.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcBase.Model\MvcBase.Model.csproj">
+      <Project>{a4e6f99d-ce69-4ce8-b120-3677e3facd29}</Project>
+      <Name>MvcBase.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcBase.Web.Core\MvcBase.Web.Core.csproj">
+      <Project>{577739f4-2317-4a6b-a6fc-ba81a6feb19f}</Project>
+      <Name>MvcBase.Web.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

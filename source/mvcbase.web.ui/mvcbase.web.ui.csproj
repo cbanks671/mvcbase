@@ -240,6 +240,24 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MvcBase.Core\MvcBase.Core.csproj">
+      <Project>{270b08c2-dbee-4682-9c65-9c69bdd57f89}</Project>
+      <Name>MvcBase.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcBase.Model\MvcBase.Model.csproj">
+      <Project>{a4e6f99d-ce69-4ce8-b120-3677e3facd29}</Project>
+      <Name>MvcBase.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcBase.Service\MvcBase.Service.csproj">
+      <Project>{db07178f-637f-4efa-a5bd-e55b91b7a69d}</Project>
+      <Name>MvcBase.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcBase.Web.Core\MvcBase.Web.Core.csproj">
+      <Project>{577739f4-2317-4a6b-a6fc-ba81a6feb19f}</Project>
+      <Name>MvcBase.Web.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

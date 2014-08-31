@@ -1,9 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mvcbase.web.ui", "mvcbase.web.ui\mvcbase.web.ui.csproj", "{F648CC3B-C262-4195-9EA8-776468944829}"
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mvcbase.web.ui", "source\mvcbase.web.ui\mvcbase.web.ui.csproj", "{F648CC3B-C262-4195-9EA8-776468944829}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

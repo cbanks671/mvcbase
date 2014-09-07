@@ -354,57 +354,14 @@ namespace MvcBase.Web.UI.Controllers
         [HttpGet]
         public ViewResult UserProfile(string id)
         {
-            var currentuserid = User.Identity.GetUserId();
-            var user = userService.GetUserProfile(id);
-            var userdetail = userProfileService.GetUser(id);
-            UserProfileViewModel userprofile = new UserProfileViewModel()
-            {
-                FirstName = userdetail.FirstName,
-                LastName = userdetail.LastName,
-                Email = userdetail.Email,
-                UserName = user.UserName,
-                DateCreated = user.DateCreated,
-                LastLoginTime = user.LastLoginTime,
-                UserId = user.Id,
-                DateOfBirth = userdetail.DateOfBirth,
-                Gender = userdetail.Gender,
-                Address = userdetail.Address,
-                City = userdetail.City,
-                State = userdetail.State,
-                Country = userdetail.Country,
-                ZipCode = userdetail.ZipCode,
-                ContactNo = userdetail.ContactNo,
-            };
+            var user = userProfileService.GetUser(User.Identity.GetUserId());
+            UserProfileFormModel editUser = Mapper.Map<UserProfile, UserProfileFormModel>(user);
             
-            return View(userprofile);
+            return View(editUser);
         }
-
-
-        public ActionResult EditBasicInfo()
-        {
-            var user = userProfileService.GetUser(User.Identity.GetUserId());
-            UserProfileFormModel editUser = Mapper.Map<UserProfile, UserProfileFormModel>(user);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return PartialView("EditBasicInfo", editUser);
-        }
-
-        public ActionResult EditPersonalInfo()
-        {
-            var user = userProfileService.GetUser(User.Identity.GetUserId());
-            UserProfileFormModel editUser = Mapper.Map<UserProfile, UserProfileFormModel>(user);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return PartialView("EditPersonalInfo", editUser);
-        }
-
 
         [HttpPost]
-        public ActionResult EditProfile(UserProfileFormModel editedProfile)
+        public ActionResult UserProfile(UserProfileFormModel editedProfile)
         {
             UserProfile user = Mapper.Map<UserProfileFormModel, UserProfile>(editedProfile);
             ApplicationUser applicationUser = userService.GetUser(editedProfile.UserId);

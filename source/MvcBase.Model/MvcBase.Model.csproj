@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Company.cs" />
     <Compile Include="Models\RegistrationToken.cs" />
     <Compile Include="Models\SecurityToken.cs" />
     <Compile Include="Models\UserProfile.cs" />

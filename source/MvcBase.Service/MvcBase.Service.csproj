@@ -55,6 +55,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SecurityTockenService.cs" />
+    <Compile Include="CompanyService.cs" />
     <Compile Include="UserProfileService.cs" />
     <Compile Include="UserService.cs" />
   </ItemGroup>

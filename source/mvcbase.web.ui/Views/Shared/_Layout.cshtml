@@ -30,6 +30,11 @@
         </div>
     </div>
     <div class="container body-content">
+        @if (TempData.ContainsKey("flash"))
+        {
+            @Html.Partial("Alert", TempData["flash"]);
+        }
+
         @RenderBody()
         <hr />
         <footer>

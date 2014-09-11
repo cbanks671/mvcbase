@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using MvcBase.Web.ViewModels;
 using MvcBase.Model.Models;
 using AutoMapper;
+using MvcBase.Web.UI.ViewModels;
 
 namespace MvcBase.Web.UI.Controllers
 {
@@ -22,17 +23,19 @@ namespace MvcBase.Web.UI.Controllers
     public class AccountController : Controller
     {
         private IUserService userService;
+        private ICompanyService companyService;
         private IUserProfileService userProfileService;
-        
         private ISecurityTokenService securityTokenService;
         private IUserMailer userMailer = new UserMailer();
         private UserManager<ApplicationUser> UserManager;
         public AccountController(IUserService userService, 
+                                 ICompanyService companyService,
                                  IUserProfileService userProfileService, 
                                  ISecurityTokenService securityTokenService, 
                                  UserManager<ApplicationUser> userManager)
         {
             this.userService = userService;
+            this.companyService = companyService;
             this.userProfileService = userProfileService;
             this.securityTokenService = securityTokenService;
             this.UserManager = userManager;
@@ -89,7 +92,8 @@ namespace MvcBase.Web.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName };
+                var company = new Company() { Name = model.Name, Address = model.Address, City = model.City, State = model.State, ZipCode = model.ZipCode, Country = model.Country, ContactNo = model.ContactNo };
+                var user = new ApplicationUser() { UserName = model.UserName, Company = company };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -109,7 +113,135 @@ namespace MvcBase.Web.UI.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-        
+
+        //
+        // GET: /Account/ConfirmEmail
+        [AllowAnonymous]
+        public async Task<ActionResult> ConfirmEmail(string userId, string code)
+        {
+            if (userId == null || code == null)
+            {
+                return View("Error");
+            }
+            var result = await UserManager.ConfirmEmailAsync(userId, code);
+            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+        }
+
+
+        //
+        // GET: /Account/ChangePassword
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/ChangePassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                if (user != null)
+                {
+                    await SignInAsync(user, isPersistent: false);
+                }
+                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+            }
+            AddErrors(result);
+            return View(model);
+        }
+
+
+        [AllowAnonymous]
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByNameAsync(model.Email);
+                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                {
+                    // Don't reveal that the user does not exist or is not confirmed
+                    return View("ForgotPasswordConfirmation");
+                }
+
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        //
+        // GET: /Account/ForgotPasswordConfirmation
+        [AllowAnonymous]
+        public ActionResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
+
+        //
+        // GET: /Account/ResetPassword
+        [AllowAnonymous]
+        public ActionResult ResetPassword(string code)
+        {
+            return code == null ? View("Error") : View();
+        }
+
+        //
+        // POST: /Account/ResetPassword
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await UserManager.FindByNameAsync(model.Email);
+            if (user == null)
+            {
+                // Don't reveal that the user does not exist
+                return RedirectToAction("ResetPasswordConfirmation", "Account");
+            }
+            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("ResetPasswordConfirmation", "Account");
+            }
+            AddErrors(result);
+            return View();
+        }
+
+        //
+        // GET: /Account/ResetPasswordConfirmation
+        [AllowAnonymous]
+        public ActionResult ResetPasswordConfirmation()
+        {
+            return View();
+        }
+
+
         //
         // POST: /Account/Disassociate
         [HttpPost]
@@ -372,9 +504,12 @@ namespace MvcBase.Web.UI.Controllers
             {
                 userService.UpdateUser(applicationUser);
                 userProfileService.UpdateUserProfile(user);
+
+                TempData.Add("flash", new FlashSuccessViewModel("Your Profile has been saved successfully."));
+
                 return RedirectToAction("UserProfile", new { id = editedProfile.UserId });
             }
-            return PartialView("EditProfile", editedProfile);
+            return View(editedProfile);
         }
 
         #region Helpers

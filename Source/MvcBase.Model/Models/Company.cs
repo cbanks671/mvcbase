@@ -16,21 +16,13 @@ namespace MvcBase.Model.Models
 
         [Key]
         public int Id { get; set; }
-
         public DateTime DateCreated { get; set; }
-
         public string Name { get; set; }
-
         public string Address { get; set; }
-
         public string City { get; set; }
-
         public string State { get; set; }
-
         public string Country { get; set; }
-
         public double? ZipCode { get; set; }
-
         public double? ContactNo { get; set; }
     }
 }

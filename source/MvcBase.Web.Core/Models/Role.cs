@@ -8,11 +8,13 @@ namespace MvcBase.Web.Core.Models
     public class Roles
     {
         public const string Admin = "Admin";
-        public const string User = "User";  
+        public const string User = "User";
+        public const string Manager = "Manager";  
     }
     public enum UserRoles
     {
         Admin = 1,
-        User = 2       
+        User = 2,    
+        Manager = 3
     }
 }

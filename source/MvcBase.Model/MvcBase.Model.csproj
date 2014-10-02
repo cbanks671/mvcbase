@@ -48,8 +48,17 @@
   <ItemGroup>
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\PropertyFeature.cs" />
+    <Compile Include="Models\Property.cs" />
+    <Compile Include="Models\BuildingClass.cs" />
+    <Compile Include="Models\PropertySubType.cs" />
+    <Compile Include="Models\Feature.cs" />
+    <Compile Include="Models\PropertyType.cs" />
     <Compile Include="Models\RegistrationToken.cs" />
     <Compile Include="Models\SecurityToken.cs" />
+    <Compile Include="Models\Subscription.cs" />
+    <Compile Include="Models\SubscriptionInterval.cs" />
+    <Compile Include="Models\SubscriptionPlan.cs" />
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

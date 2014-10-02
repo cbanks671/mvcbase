@@ -2,6 +2,7 @@
 using MvcBase.Data.Infrastructure;
 using MvcBase.Model.Models;
 using System;
+using System.Collections.Generic;
 
 namespace MvcBase.Service
 {
@@ -9,6 +10,7 @@ namespace MvcBase.Service
     {
         UserProfile GetProfile(int id);
         UserProfile GetUser(string userid);
+        IEnumerable<UserProfile> GetUsers(int companyId);
         UserProfile GetUserByEmail(string email);
         
         void CreateUserProfile(string userId);
@@ -34,6 +36,12 @@ namespace MvcBase.Service
         public UserProfile GetUser(string userid)
         {
             var userprofile = userProfileRepository.Get(u => u.UserId == userid);
+            return userprofile;
+        }
+
+        public IEnumerable<UserProfile> GetUsers(int companyId)
+        {
+            var userprofile = userProfileRepository.GetMany(u => u.User.CompanyId == companyId);
             return userprofile;
         }
 

@@ -14,6 +14,7 @@ namespace MvcBase.Service
     {
         ApplicationUser GetUser(string userId);
         IEnumerable<ApplicationUser> GetUsers();
+        IEnumerable<ApplicationUser> GetUsers(int companyId);
         IEnumerable<ApplicationUser> GetUsers(string username);
         ApplicationUser GetUserProfile(string userid);
         ApplicationUser GetUsersByEmail(string email);
@@ -23,11 +24,10 @@ namespace MvcBase.Service
       
         IEnumerable<ValidationResult> CanAddUser(string email);      
         void UpdateUser(ApplicationUser user);
-       void SaveUser();
-       void EditUser(string id, string firstname, string lastname, string email);
+        void SaveUser();
+        void EditUser(string id, string firstname, string lastname, string email);
 
-
-       void SaveImageURL(string userId, string imageUrl);
+        void SaveImageURL(string userId, string imageUrl);
     }
 
     public class UserService : IUserService
@@ -69,7 +69,13 @@ namespace MvcBase.Service
         }
         public IEnumerable<ApplicationUser> GetUsers(string username)
         {
-            var users = userRepository.GetMany(u => (u.FirstName + " " + u.LastName).Contains(username) || u.Email.Contains(username)).OrderBy(u => u.FirstName).ToList();
+            var users = userRepository.GetMany(u => (u.FirstName + " " + u.LastName).Contains(username) || u.Email.Contains(username) || u.UserName == username).OrderBy(u => u.LastName).ToList();
+
+            return users;
+        }
+        public IEnumerable<ApplicationUser> GetUsers(int companyId)
+        {
+            var users = userRepository.GetMany(u => u.CompanyId == companyId).OrderBy(u => u.LastName).ToList();
 
             return users;
         }

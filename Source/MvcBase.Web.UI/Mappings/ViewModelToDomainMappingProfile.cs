@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MvcBase.Model.Models;
+using MvcBase.Web.UI.Areas.Admin.ViewModel;
 using MvcBase.Web.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,11 @@ namespace MvcBase.Mappings
 
         protected override void Configure()
         {
-            Mapper.CreateMap<UserProfileFormModel, UserProfile>();
+            Mapper.CreateMap<MvcBase.Web.ViewModels.UserProfileFormModel, UserProfile>();
+            Mapper.CreateMap<CompanyListViewModel, Company>();
+            Mapper.CreateMap<CompanyViewModel, Company>();
+            Mapper.CreateMap<CompanyFormViewModel, Company>();
+            Mapper.CreateMap<MvcBase.Web.UI.Areas.Admin.ViewModel.UserProfileListViewModel, UserProfile>();
         }
     }
 }

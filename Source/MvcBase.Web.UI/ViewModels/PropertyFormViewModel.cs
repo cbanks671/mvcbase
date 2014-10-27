@@ -1,16 +1,12 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-namespace MvcBase.Model.Models
+namespace MvcBase.Web.ViewModels
 {
-    public class Property
+    public class PropertyFormViewModel
     {
-        public Property()
-        {
-            DateEdited = DateTime.Now;
-        }
-        [Key]
         public int Id { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateEdited { get; set; }
@@ -28,10 +24,15 @@ namespace MvcBase.Model.Models
         public int BuildingSize { get; set; }
         public int YearBuilt { get; set; }
         public int ListingId { get; set; }
-        
-        public virtual Company Company { get; set; }
-        public PropertyType PropertyType { get; set; }
-        public PropertySubType PropertySubType { get; set; }
-        public BuildingClass BuildingClass { get; set; }
+        public int CompanyId { get; set; }
+        //public PropertyTypeFormModel PropertyType { get; set; }
+        //public PropertySubType PropertySubType { get; set; }
+        //public BuildingClass BuildingClass { get; set; }
     }
+
+    //public class PropertyTypeFormModel
+    //{
+    //    public int Id { get; set; }
+    //    public string Name { get; set; }
+    //}
 }

@@ -1,0 +1,146 @@
+﻿@model MvcBase.Web.ViewModels.PropertyFormViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detail</h2>
+
+<div>
+    <h4>PropertyFormViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateEdited)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateEdited)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ZipCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalSpaceAvailable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalSpaceAvailable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RentalRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RentalRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinDivisible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinDivisible)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxContiguous)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxContiguous)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BuildingSize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BuildingSize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.YearBuilt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YearBuilt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ListingId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ListingId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

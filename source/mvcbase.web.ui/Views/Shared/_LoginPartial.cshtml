@@ -12,10 +12,10 @@
         </a>
         <ul class="dropdown-menu">
             <li>
-                @Html.ActionLink("Profile", "UserProfile", "Account", new { id = User.Identity.GetUserId() }, new { @title = "View Profile" })
+                @Html.ActionLink("Profile", "UserProfile", "Account", new { id = User.Identity.GetUserId(), area = "" }, new { @title = "View Profile" })
             </li>
             <li>
-                @Html.ActionLink("ChangePassword", "ChangePassword", "Account", new { id = User.Identity.GetUserId() }, new { @title = "Change Password" })
+                @Html.ActionLink("ChangePassword", "ChangePassword", "Account", new { id = User.Identity.GetUserId(), area = "" }, new { @title = "Change Password" })
             </li>
             <li class="divider"></li>
             <li>@Html.ActionLink("Sign Out", "LogOff", "Account")</li>

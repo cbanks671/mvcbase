@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using MvcBase.Web.UI.Areas.Admin.ViewModel;
 
 namespace MvcBase.Mappings
 {
@@ -20,12 +19,13 @@ namespace MvcBase.Mappings
 
         protected override void Configure()
         {
-            Mapper.CreateMap<UserProfile, MvcBase.Web.ViewModels.UserProfileFormModel>();
+            Mapper.CreateMap<ApplicationUser, MvcBase.Web.ViewModels.UserProfileFormModel>();
+            Mapper.CreateMap<ApplicationUser, MvcBase.Web.ViewModels.UserProfileListViewModel>();
             Mapper.CreateMap<Company, CompanyListViewModel>();
             Mapper.CreateMap<Company, CompanyViewModel>();
             Mapper.CreateMap<Company, CompanyFormViewModel>();
-            Mapper.CreateMap<UserProfile, MvcBase.Web.UI.Areas.Admin.ViewModel.UserProfileListViewModel>();
-            Mapper.CreateMap<UserProfile, MvcBase.Web.UI.Areas.Admin.ViewModel.UserProfileFormModel>();
+            Mapper.CreateMap<Property, PropertyFormViewModel>();
+            Mapper.CreateMap<Property, PropertyListViewModel>();
         }
     }
 }

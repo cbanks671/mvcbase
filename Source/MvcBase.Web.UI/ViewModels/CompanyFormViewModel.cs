@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace MvcBase.Web.UI.Areas.Admin.ViewModel
+namespace MvcBase.Web.ViewModels
 {
-    public class CompanyViewModel
+    public class CompanyFormViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

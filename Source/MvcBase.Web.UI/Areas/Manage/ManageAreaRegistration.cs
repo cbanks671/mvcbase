@@ -1,22 +1,22 @@
 ﻿using System.Web.Mvc;
 
-namespace MvcBase.Web.UI.Areas.Admin
+namespace MvcBase.Web.UI.Areas.Manage
 {
-    public class AdminAreaRegistration : AreaRegistration 
+    public class ManageAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
         {
             get 
             {
-                return "Admin";
+                return "Manage";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "Admin_default",
-                "Admin/{controller}/{action}/{id}",
+                "Manage_default",
+                "Manage/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional }
             );
         }

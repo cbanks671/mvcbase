@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MvcBase.Web.UI.Areas.Admin.ViewModel
+namespace MvcBase.Web.ViewModels
 {
     public class CompanyListViewModel
     {

@@ -177,19 +177,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\CustomerController.cs" />
-    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
-    <Compile Include="Areas\Admin\Models\RegisterViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModel\CompanyViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModel\CompanyFormViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModel\CompanyListViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModel\FlashViewModels.cs" />
-    <Compile Include="Areas\Admin\ViewModel\UserProfileFormModel.cs" />
-    <Compile Include="Areas\Admin\ViewModel\UserProfileListViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModel\UserProfileViewModel.cs" />
+    <Compile Include="Areas\Setting\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Setting\Controllers\CompanyController.cs" />
+    <Compile Include="Areas\Setting\Controllers\UserController.cs" />
+    <Compile Include="Areas\Manage\ManageAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Areas\Manage\Controllers\PropertyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -202,8 +196,14 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CompanyFormViewModel.cs" />
+    <Compile Include="ViewModels\CompanyListViewModel.cs" />
+    <Compile Include="ViewModels\CompanyViewModel.cs" />
     <Compile Include="ViewModels\FlashViewModels.cs" />
+    <Compile Include="ViewModels\PropertyFormViewModel.cs" />
+    <Compile Include="ViewModels\PropertyListViewModel.cs" />
     <Compile Include="ViewModels\UserProfileFormModel.cs" />
+    <Compile Include="ViewModels\UserProfileListViewModel.cs" />
     <Compile Include="ViewModels\UserProfileViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -215,16 +215,19 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\Customer\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Customer\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\Customer\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Customer\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\User\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\User\UserProfile.cshtml" />
+    <Content Include="Areas\Setting\Views\web.config" />
+    <Content Include="Areas\Setting\Views\Company\Index.cshtml" />
+    <Content Include="Areas\Setting\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Setting\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Setting\Views\Company\Details.cshtml" />
+    <Content Include="Areas\Setting\Views\Company\Create.cshtml" />
+    <Content Include="Areas\Setting\Views\Company\Edit.cshtml" />
+    <Content Include="Areas\Setting\Views\User\Index.cshtml" />
+    <Content Include="Areas\Setting\Views\User\Create.cshtml" />
+    <Content Include="Areas\Setting\Views\User\Edit.cshtml" />
+    <Content Include="Areas\Manage\Views\web.config" />
+    <Content Include="Areas\Manage\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Manage\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -274,9 +277,14 @@
     <Content Include="Views\Account\UserProfile.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Shared\Alert.cshtml" />
+    <Content Include="Areas\Manage\Views\Property\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\Property\Create.cshtml" />
+    <Content Include="Areas\Manage\Views\Property\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Manage\Models\" />
+    <Folder Include="Areas\Setting\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

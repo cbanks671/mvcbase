@@ -33,14 +33,17 @@ namespace MvcBase.Service
     public class UserService : IUserService
     {
         private readonly IUserRepository userRepository;
-        private readonly IUserProfileRepository userProfileRepository;
+        //private readonly IUserProfileRepository userProfileRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public UserService(IUserRepository userRepository, IUnitOfWork unitOfWork,IUserProfileRepository userProfileRepository)
+        public UserService(IUserRepository userRepository
+                            , IUnitOfWork unitOfWork
+                            //, IUserProfileRepository userProfileRepository
+            )
         {
             this.userRepository = userRepository;
             this.unitOfWork = unitOfWork;
-            this.userProfileRepository = userProfileRepository;
+            //this.userProfileRepository = userProfileRepository;
         }
         public ApplicationUser GetUserProfile(string userid)
         {
@@ -94,16 +97,13 @@ namespace MvcBase.Service
             }
         }
 
-        
-
-
-
         public void SaveImageURL(string userId, string imageUrl)
         {
             var user = GetUser(userId);
             user.ProfilePicUrl = imageUrl;
             UpdateUser(user);
         }
+
         public void EditUser(string id,string firstname, string lastname,string email)
         {
             var user = GetUser(id);
@@ -124,7 +124,7 @@ namespace MvcBase.Service
             return users;
         }
 
-       public void SaveUser()
+        public void SaveUser()
         {
             unitOfWork.Commit();
         }

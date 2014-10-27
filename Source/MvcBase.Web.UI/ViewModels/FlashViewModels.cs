@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MvcBase.Web.UI.ViewModels
+namespace MvcBase.Web.ViewModels
 {
     public abstract class FlashViewModel
     {

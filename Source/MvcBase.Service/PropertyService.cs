@@ -2,13 +2,14 @@
 using MvcBase.Data.Infrastructure;
 using MvcBase.Model.Models;
 using System;
+using System.Collections.Generic;
 
 namespace MvcBase.Service
 {
     public interface IPropertyService
     {
+        IEnumerable<Property> GetProperties(int companyId);
         Property GetProperty(int id);
-
         void CreateProperty(Property property);
         void UpdateProperty(Property property);
         void SaveProperty();
@@ -22,6 +23,12 @@ namespace MvcBase.Service
         {
             this.propertyRepository = propertyRepository;
             this.unitOfWork = unitOfWork;
+        }
+
+        public IEnumerable<Property> GetProperties(int companyId)
+        {
+            var property = propertyRepository.GetMany(p => p.Company.Id == companyId);
+            return property;
         }
 
         public Property GetProperty(int id)

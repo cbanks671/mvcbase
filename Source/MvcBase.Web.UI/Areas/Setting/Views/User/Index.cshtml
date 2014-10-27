@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MvcBase.Web.UI.Areas.Admin.ViewModel.UserProfileListViewModel>
+﻿@model IEnumerable<MvcBase.Web.ViewModels.UserProfileListViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -53,8 +53,7 @@
             @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "UserProfile", new { id=item.UserId }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>
     </tr>

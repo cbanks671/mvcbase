@@ -2,8 +2,8 @@
 using Microsoft.AspNet.Identity;
 using MvcBase.Model.Models;
 using MvcBase.Service;
-using MvcBase.Web.UI.Areas.Admin.Models;
-using MvcBase.Web.UI.Areas.Admin.ViewModel;
+using MvcBase.Web.UI.Models;
+using MvcBase.Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,38 +11,36 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MvcBase.Web.UI.Areas.Admin.Controllers
+namespace MvcBase.Web.UI.Areas.Setting.Controllers
 {
     //[Authorize(Roles = "admin")]
     public class UserController : Controller
     {
         private IUserService userService;
         private ICompanyService companyService;
-        private IUserProfileService userProfileService;
         private UserManager<ApplicationUser> userManager;
 
         public UserController(IUserService userService, 
                                  ICompanyService companyService,
-                                 IUserProfileService userProfileService, 
                                  ISecurityTokenService securityTokenService,
                                  UserManager<ApplicationUser> userManager)
         {
             this.userService = userService;
             this.companyService = companyService;
-            this.userProfileService = userProfileService;
             this.userManager = userManager;
         }
 
         // GET: Admin/User
-        public ActionResult Index(int customerId)
+        public ActionResult Index()
         {
-            //var user = await userManager.FindByIdAsync(User.Identity.GetUserId());
-            //var users = userService.GetUsers(user.CompanyId);
+            var user = userManager.FindById(User.Identity.GetUserId());
+            var users = userService.GetUsers(user.CompanyId);
 
-            ViewBag.CompanyId = customerId;
-            var users = userProfileService.GetUsers(customerId);
-            var userList = Mapper.Map<IEnumerable<UserProfile>, IEnumerable<UserProfileListViewModel>>(users);
+            //ViewBag.CompanyId = customerId;
+            //var users = userProfileService.GetUsers(customerId);
+            var userList = Mapper.Map<IEnumerable<ApplicationUser>, IEnumerable<UserProfileListViewModel>>(users);
             return View(userList);
+            //return View();
         }
 
         public ActionResult Create(int customerId)
@@ -67,18 +65,26 @@ namespace MvcBase.Web.UI.Areas.Admin.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Create(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var company = companyService.GetCompany(model.CompanyId);
-                var user = new ApplicationUser() { UserName = model.UserName, Company = company };
+                var user = new ApplicationUser()
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    ContactNo = model.ContactNo,
+                    Company = company
+                };
                 var result = await userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     var userId = user.Id;
                     var userName = user.UserName;
-                    userProfileService.CreateUserProfile(userId);
+                    //userProfileService.CreateUserProfile(userId);
 
                     return RedirectToAction("UserProfile", new { id = userId });
                 }
@@ -93,36 +99,32 @@ namespace MvcBase.Web.UI.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ViewResult UserProfile(string id)
+        public ViewResult Edit(string id)
         {
-            var user = userProfileService.GetUser(User.Identity.GetUserId());
-            UserProfileFormModel editUser = Mapper.Map<UserProfile, UserProfileFormModel>(user);
-            ApplicationUser applicationUser = userService.GetUser(editUser.UserId);
-            editUser.CustomerId = applicationUser.CompanyId;
+            var user = userManager.FindById(id);
+            UserProfileFormModel editUser = Mapper.Map<ApplicationUser, UserProfileFormModel>(user);
 
             return View(editUser);
         }
 
         [HttpPost]
-        public ActionResult UserProfile(UserProfileFormModel editedProfile)
+        public ActionResult Edit(UserProfileFormModel editedProfile)
         {
-            UserProfile user = Mapper.Map<UserProfileFormModel, UserProfile>(editedProfile);
-            ApplicationUser applicationUser = userService.GetUser(editedProfile.UserId);
+            ApplicationUser applicationUser = userService.GetUser(editedProfile.Id);
             applicationUser.FirstName = editedProfile.FirstName;
             applicationUser.LastName = editedProfile.LastName;
             applicationUser.Email = editedProfile.Email;
+            applicationUser.ContactNo = editedProfile.ContactNo;
             if (ModelState.IsValid)
             {
                 userService.UpdateUser(applicationUser);
-                userProfileService.UpdateUserProfile(user);
 
                 TempData.Add("flash", new FlashSuccessViewModel("Your Profile has been saved successfully."));
 
-                return RedirectToAction("UserProfile", new { id = editedProfile.UserId });
+                return RedirectToAction("UserProfile", new { id = editedProfile.Id });
             }
             return View(editedProfile);
         }
-
 
         private void AddErrors(IdentityResult result)
         {
@@ -131,5 +133,6 @@ namespace MvcBase.Web.UI.Areas.Admin.Controllers
                 ModelState.AddModelError("", error);
             }
         }
+
     }
 }

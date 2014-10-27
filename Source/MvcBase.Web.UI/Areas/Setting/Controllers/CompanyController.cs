@@ -1,21 +1,21 @@
 ﻿using AutoMapper;
 using MvcBase.Model.Models;
 using MvcBase.Service;
-using MvcBase.Web.UI.Areas.Admin.ViewModel;
+using MvcBase.Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MvcBase.Web.UI.Areas.Admin.Controllers
+namespace MvcBase.Web.UI.Areas.Setting.Controllers
 {
     //[Authorize(Roles = "admin")]
-    public class CustomerController : Controller
+    public class CompanyController : Controller
     {
         private ICompanyService companyService;
 
-        public CustomerController(ICompanyService companyService)
+        public CompanyController(ICompanyService companyService)
         {
             this.companyService = companyService;
         }
@@ -23,6 +23,7 @@ namespace MvcBase.Web.UI.Areas.Admin.Controllers
         // GET: Admin/Customer
         public ActionResult Index()
         {
+            // TODO: GET COMPANIES BY FOR USER
             var companies = companyService.GetCompanies();
             var companyList = Mapper.Map<IEnumerable<Company>, IEnumerable<CompanyListViewModel>>(companies);
             return View(companyList);

@@ -15,7 +15,6 @@ using System.Collections.Generic;
 using MvcBase.Web.ViewModels;
 using MvcBase.Model.Models;
 using AutoMapper;
-using MvcBase.Web.UI.ViewModels;
 
 namespace MvcBase.Web.UI.Controllers
 {
@@ -24,19 +23,19 @@ namespace MvcBase.Web.UI.Controllers
     {
         private IUserService userService;
         private ICompanyService companyService;
-        private IUserProfileService userProfileService;
+        //private IUserProfileService userProfileService;
         private ISecurityTokenService securityTokenService;
         private IUserMailer userMailer = new UserMailer();
         private UserManager<ApplicationUser> UserManager;
         public AccountController(IUserService userService, 
                                  ICompanyService companyService,
-                                 IUserProfileService userProfileService, 
+                                 //IUserProfileService userProfileService, 
                                  ISecurityTokenService securityTokenService, 
                                  UserManager<ApplicationUser> userManager)
         {
             this.userService = userService;
             this.companyService = companyService;
-            this.userProfileService = userProfileService;
+            //this.userProfileService = userProfileService;
             this.securityTokenService = securityTokenService;
             this.UserManager = userManager;
         }
@@ -93,13 +92,20 @@ namespace MvcBase.Web.UI.Controllers
             if (ModelState.IsValid)
             {
                 var company = new Company() { Name = model.Name, Address = model.Address, City = model.City, State = model.State, ZipCode = model.ZipCode, Country = model.Country, ContactNo = model.ContactNo };
-                var user = new ApplicationUser() { UserName = model.UserName, Company = company };
+                var user = new ApplicationUser() 
+                { 
+                    UserName = model.UserName, 
+                    Email = model.Email, 
+                    FirstName = model.FirstName, 
+                    LastName = model.LastName, 
+                    ContactNo = model.ContactNo,
+                    Company = company 
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     var userId = user.Id;
                     var userName = user.UserName;
-                    userProfileService.CreateUserProfile(userId);
                     await SignInAsync(user, isPersistent: false);
                     
                     return RedirectToAction("Index", "Home");
@@ -126,7 +132,6 @@ namespace MvcBase.Web.UI.Controllers
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
-
 
         //
         // GET: /Account/ChangePassword
@@ -158,7 +163,6 @@ namespace MvcBase.Web.UI.Controllers
             AddErrors(result);
             return View(model);
         }
-
 
         [AllowAnonymous]
         public ActionResult ForgotPassword()
@@ -486,28 +490,27 @@ namespace MvcBase.Web.UI.Controllers
         [HttpGet]
         public ViewResult UserProfile(string id)
         {
-            var user = userProfileService.GetUser(User.Identity.GetUserId());
-            UserProfileFormModel editUser = Mapper.Map<UserProfile, UserProfileFormModel>(user);
-            
+            var user = UserManager.FindById(id);
+            UserProfileFormModel editUser = Mapper.Map<ApplicationUser, UserProfileFormModel>(user);
+
             return View(editUser);
         }
 
         [HttpPost]
         public ActionResult UserProfile(UserProfileFormModel editedProfile)
         {
-            UserProfile user = Mapper.Map<UserProfileFormModel, UserProfile>(editedProfile);
-            ApplicationUser applicationUser = userService.GetUser(editedProfile.UserId);
+            ApplicationUser applicationUser = userService.GetUser(editedProfile.Id);
             applicationUser.FirstName = editedProfile.FirstName;
             applicationUser.LastName = editedProfile.LastName;
             applicationUser.Email = editedProfile.Email;
+            applicationUser.ContactNo = editedProfile.ContactNo;
             if (ModelState.IsValid)
             {
                 userService.UpdateUser(applicationUser);
-                userProfileService.UpdateUserProfile(user);
 
                 TempData.Add("flash", new FlashSuccessViewModel("Your Profile has been saved successfully."));
 
-                return RedirectToAction("UserProfile", new { id = editedProfile.UserId });
+                return RedirectToAction("UserProfile", new { id = editedProfile.Id });
             }
             return View(editedProfile);
         }
@@ -526,10 +529,10 @@ namespace MvcBase.Web.UI.Controllers
         //}
 
         // Add this private variable
-      private IAuthenticationManager _authnManager;
+        private IAuthenticationManager _authnManager;
 
         // Modified this from private to public and add the setter
-      public IAuthenticationManager AuthenticationManager
+        public IAuthenticationManager AuthenticationManager
       {
           get
           {

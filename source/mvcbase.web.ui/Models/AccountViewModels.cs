@@ -96,25 +96,35 @@ namespace MvcBase.Web.UI.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-        
+
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "First name")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "*")]
+        [Display(Name = "Last name")]
+        public string LastName { get; set; }
+
         [Required]
         [Display(Name = "Company Name")]
         public string Name { get; set; }
         public string Address { get; set; }
 
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
         public string City { get; set; }
 
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
         public string State { get; set; }
 
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
         public string Country { get; set; }
 
         public double? ZipCode { get; set; }
 
         [DataType(DataType.PhoneNumber)]
         public double? ContactNo { get; set; }
+
+        public int CompanyId { get; set; }
     }
 
     public class ResetPasswordViewModel

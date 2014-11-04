@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
 using MvcBase.Model.Models;
 using MvcBase.Service;
 using MvcBase.Web.ViewModels;
@@ -14,10 +15,13 @@ namespace MvcBase.Web.UI.Areas.Setting.Controllers
     public class CompanyController : Controller
     {
         private ICompanyService companyService;
+        private UserManager<ApplicationUser> UserManager;
 
-        public CompanyController(ICompanyService companyService)
+        public CompanyController(ICompanyService companyService,
+                                    UserManager<ApplicationUser> userManager)
         {
             this.companyService = companyService;
+            this.UserManager = userManager;
         }
 
         // GET: Admin/Customer
@@ -30,9 +34,12 @@ namespace MvcBase.Web.UI.Areas.Setting.Controllers
         }
 
         // GET: Admin/Customer/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details()
         {
-            var company = companyService.GetCompany(id);
+            string userName = HttpContext.User.Identity.Name;
+            var user = UserManager.FindByName(userName);
+
+            var company = companyService.GetCompany(user.CompanyId);
             var companyDetails = Mapper.Map<Company, CompanyViewModel>(company);
             return View(companyDetails);
         }
@@ -64,9 +71,12 @@ namespace MvcBase.Web.UI.Areas.Setting.Controllers
         }
 
         // GET: Admin/Customer/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
-            var company = companyService.GetCompany(id);
+            string userName = HttpContext.User.Identity.Name;
+            var user = UserManager.FindByName(userName);
+
+            var company = companyService.GetCompany(user.CompanyId);
             CompanyFormViewModel editCompany = Mapper.Map<Company, CompanyFormViewModel>(company);
             if (company == null)
             {

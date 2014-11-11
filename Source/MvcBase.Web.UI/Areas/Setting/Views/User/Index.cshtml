@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<MvcBase.Web.ViewModels.UserProfileListViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Manage Users";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", new { customerId = @ViewBag.CompanyId })
+    @Html.ActionLink("Add New User", "Create", new { customerId = @ViewBag.CompanyId }, new { @class = "btn btn-primary btn-lg" })
 </p>
 <table class="table">
     <tr>

@@ -15,11 +15,14 @@ namespace MvcBase.Web.UI.Areas.Manage.Controllers
     {
         private UserManager<ApplicationUser> UserManager;
         private IPropertyService propertyService;
+        private IPropertyTypeService propertyTypeService;
 
         public PropertyController(IPropertyService propertyService,
+                                    IPropertyTypeService propertyTypeService,
                                     UserManager<ApplicationUser> userManager)
         {
             this.propertyService = propertyService;
+            this.propertyTypeService = propertyTypeService;
             this.UserManager = userManager;
         }
 
@@ -35,13 +38,43 @@ namespace MvcBase.Web.UI.Areas.Manage.Controllers
         }
 
         // GET: Admin/Property/Create
-        public ActionResult Create()
+        public ActionResult ListType()
         {
+            return View();
+        }
+
+        // GET: Admin/Property/Create
+        public ActionResult Create(int? id)
+        {
+            if (id == 0 || id == null)
+            {
+                TempData.Add("flash", new FlashDangerViewModel("A valid property listing type was not selected"));
+                return RedirectToAction("ListType", "Property", null);
+            }
+
+            if (!Enum.IsDefined(typeof(PropertyListType), id))
+            {
+                TempData.Add("flash", new FlashDangerViewModel("A valid property listing type was not selected"));
+                return RedirectToAction("ListType", "Property", null);
+            }
+
             var createProperty = new PropertyFormViewModel();
 
             string userName = HttpContext.User.Identity.Name;
             var user = UserManager.FindByName(userName);
             createProperty.CompanyId = user.CompanyId;
+            createProperty.PropertyListType = (PropertyListType)id;
+
+            createProperty.PropertyTypeList = new List<SelectListItem>();
+            IEnumerable<PropertyType> propertyType = propertyTypeService.GetPropertyTypes();
+            createProperty.PropertyTypeList = from pt in propertyType
+                                               select new SelectListItem
+                                               {
+                                                   Text = pt.Name.ToString(),
+                                                   Value = pt.Id.ToString()
+                                               };
+
+            ViewBag.PropertyListType = (PropertyListType)id;
 
             return View(createProperty);
         }

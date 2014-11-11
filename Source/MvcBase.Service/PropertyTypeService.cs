@@ -2,13 +2,14 @@
 using MvcBase.Data.Infrastructure;
 using MvcBase.Model.Models;
 using System;
+using System.Collections.Generic;
 
 namespace MvcBase.Service
 {
     public interface IPropertyTypeService
     {
         PropertyType GetPropertyType(int id);
-
+        IEnumerable<PropertyType> GetPropertyTypes();
         void CreatePropertyType(PropertyType propertyType);
         void UpdatePropertyType(PropertyType propertyType);
         void SavePropertyType();
@@ -22,6 +23,12 @@ namespace MvcBase.Service
         {
             this.propertyTypeRepository = propertyTypeRepository;
             this.unitOfWork = unitOfWork;
+        }
+
+        public IEnumerable<PropertyType> GetPropertyTypes()
+        {
+            var propertyTypes = propertyTypeRepository.GetAll();
+            return propertyTypes;
         }
 
         public PropertyType GetPropertyType(int id)

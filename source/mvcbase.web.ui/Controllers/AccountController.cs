@@ -66,7 +66,8 @@ namespace MvcBase.Web.UI.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    TempData.Add("flash", new FlashDangerViewModel("Invalid username or password."));
+                    //ModelState.AddModelError("", "Invalid username or password.");
                 }
             }
 

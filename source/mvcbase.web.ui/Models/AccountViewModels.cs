@@ -82,33 +82,35 @@ namespace MvcBase.Web.UI.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Please enter username")]
         [Display(Name = "Username")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter password")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "Please confirm password")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [Required(ErrorMessage = "Please enter email address")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "Please enter first name")]
         [Display(Name = "First name")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "*")]
+        [Required(ErrorMessage = "Please enter last name")]
         [Display(Name = "Last name")]
         public string LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter company name")]
         [Display(Name = "Company Name")]
         public string Name { get; set; }
         public string Address { get; set; }

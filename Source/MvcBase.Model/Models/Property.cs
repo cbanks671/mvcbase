@@ -8,6 +8,7 @@ namespace MvcBase.Model.Models
     {
         public Property()
         {
+            DateCreated = DateTime.Now;
             DateEdited = DateTime.Now;
         }
         [Key]
@@ -21,17 +22,10 @@ namespace MvcBase.Model.Models
         public string State { get; set; }
         public string Country { get; set; }
         public double? ZipCode { get; set; }
-        public int TotalSpaceAvailable { get; set; }
-        public decimal RentalRate { get; set; }
-        public int MinDivisible { get; set; }
-        public int MaxContiguous { get; set; }
-        public int BuildingSize { get; set; }
-        public int YearBuilt { get; set; }
-        public int ListingId { get; set; }
-        
+        public int CompanyId { get; set; }
         public virtual Company Company { get; set; }
-        public PropertyType PropertyType { get; set; }
-        public PropertySubType PropertySubType { get; set; }
-        public BuildingClass BuildingClass { get; set; }
+        public virtual PropertyListType PropertyListType { get; set; }
+        public virtual PropertyType PropertyType { get; set; }
+        public virtual PropertySubType PropertySubType { get; set; }
     }
 }

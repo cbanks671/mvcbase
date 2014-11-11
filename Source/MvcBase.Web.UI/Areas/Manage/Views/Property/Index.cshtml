@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<MvcBase.Web.ViewModels.PropertyListViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Manage Properties";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add New Property", "ListType", null, new { @class = "btn btn-primary btn-lg" })
 </p>
 <table class="table">
     <tr>

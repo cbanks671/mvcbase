@@ -36,7 +36,7 @@ namespace MvcBase.Web.UI.Areas.Setting.Controllers
             var user = userManager.FindById(User.Identity.GetUserId());
             var users = userService.GetUsers(user.CompanyId);
 
-            //ViewBag.CompanyId = customerId;
+            ViewBag.CompanyId = user.CompanyId;
             //var users = userProfileService.GetUsers(customerId);
             var userList = Mapper.Map<IEnumerable<ApplicationUser>, IEnumerable<UserProfileListViewModel>>(users);
             return View(userList);

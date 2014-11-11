@@ -1,7 +1,10 @@
-﻿using System;
+﻿using MvcBase.Model.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace MvcBase.Web.ViewModels
 {
@@ -10,29 +13,36 @@ namespace MvcBase.Web.ViewModels
         public int Id { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateEdited { get; set; }
+        [Required(ErrorMessage="Please enter a property name")]
         public string Name { get; set; }
         public string Description { get; set; }
+        [Required(ErrorMessage = "Please enter a property address")]
         public string Address { get; set; }
+        [Required(ErrorMessage = "Please enter a city")]
         public string City { get; set; }
+        [Required(ErrorMessage = "Please enter a state")]
         public string State { get; set; }
         public string Country { get; set; }
+        [Required(ErrorMessage = "Please enter a zip code")]
         public double? ZipCode { get; set; }
-        public int TotalSpaceAvailable { get; set; }
-        public decimal RentalRate { get; set; }
-        public int MinDivisible { get; set; }
-        public int MaxContiguous { get; set; }
-        public int BuildingSize { get; set; }
-        public int YearBuilt { get; set; }
-        public int ListingId { get; set; }
+        public PropertyListType PropertyListType { get; set; }
+        public virtual PropertyType PropertyType { get; set; }
+        public virtual PropertySubType PropertySubType { get; set; }
         public int CompanyId { get; set; }
-        //public PropertyTypeFormModel PropertyType { get; set; }
-        //public PropertySubType PropertySubType { get; set; }
-        //public BuildingClass BuildingClass { get; set; }
+
+        public IEnumerable<SelectListItem> PropertyTypeList { get; set; }
+        //public IEnumerable<SelectListItem> PropertySubTypeList { get; set; }
     }
 
-    //public class PropertyTypeFormModel
-    //{
-    //    public int Id { get; set; }
-    //    public string Name { get; set; }
-    //}
+    public class PropertyTypeFormModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
+    public class PropertySubTypeFormModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
 }

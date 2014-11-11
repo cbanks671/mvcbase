@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums.cs" />
+    <Compile Include="PropertySpaceService.cs" />
     <Compile Include="SubscriptionPlanService.cs" />
     <Compile Include="SubscriptionService.cs" />
     <Compile Include="PropertySubTypeService.cs" />

@@ -48,9 +48,11 @@
   <ItemGroup>
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\PropertyFeature.cs" />
     <Compile Include="Models\Property.cs" />
     <Compile Include="Models\BuildingClass.cs" />
+    <Compile Include="Models\PropertySpace.cs" />
     <Compile Include="Models\PropertySubType.cs" />
     <Compile Include="Models\Feature.cs" />
     <Compile Include="Models\PropertyType.cs" />

@@ -228,6 +228,7 @@
     <Content Include="Areas\Manage\Views\web.config" />
     <Content Include="Areas\Manage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Manage\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Manage\Views\Property\ListType.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -280,6 +281,7 @@
     <Content Include="Areas\Manage\Views\Property\Index.cshtml" />
     <Content Include="Areas\Manage\Views\Property\Create.cshtml" />
     <Content Include="Areas\Manage\Views\Property\Details.cshtml" />
+    <Content Include="Views\Shared\_LayoutSimple.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

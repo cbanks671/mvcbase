@@ -9,5 +9,7 @@ namespace MvcBase.Model.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
+        public int PropertyTypeId { get; set; }
+        public virtual PropertyType PropertyType { get; set; }
     }
 }

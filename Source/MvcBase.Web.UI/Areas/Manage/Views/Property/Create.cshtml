@@ -1,95 +1,72 @@
 ﻿@model MvcBase.Web.ViewModels.PropertyFormViewModel
 
 @{
-    ViewBag.Title = "Add New Property";
+    ViewBag.Title = @ViewBag.PropertyListType + " Property Setup";
+    ViewBag.NavProperty = "active";
 }
 
-<h2>@ViewBag.Title</h2>
-
-@using (Html.BeginForm()) 
-{
-    @Html.HiddenFor(model => model.CompanyId)
-    @Html.AntiForgeryToken()
+    @{ Html.RenderPartial("_twoColumnTitle");  }
+    @{ Html.RenderPartial("_propertyListGroup");  }
     
-    <div class="form-horizontal">
-        <h4>Add a property for @ViewBag.PropertyListType</h4>
-        <hr />
-        <fieldset>
-            <legend>About Property</legend>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+    <div class="col-md-9">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.CompanyId)
+            @Html.HiddenFor(model => model.PropertyListType)
+            <div class="form-horizontal">
+                
+                <div class="form-group">
+                    <label>About Property</label>
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name" } })
                     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Description, 3, 3, new { @class = "form-control" } )
+                <div class="form-group">
+                    @Html.TextAreaFor(model => model.Description, 3, 3, new { @class = "form-control", @placeholder = "Description" })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </div>
-            </div>
-        </fieldset>
-
-        <fieldset>
-            <legend>Property Location</legend>
-            <div class="form-group">
-                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                
+                <div class="form-group">
+                    <label>Property Location</label>
+                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Street" } })
                     @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="form-group">
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
                     @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
                 </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-4">
-                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control", @placeholder = "State" } })
+                            @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-md-offset-2">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Zip Code" } })
+                            @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                 </div>
-
-                @Html.LabelFor(model => model.ZipCode, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-4">
-                    @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="form-group">
+                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control", @placeholder = "Country" } })
                     @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
                 </div>
-            </div>
-        </fieldset>
-        <fieldset>
-            <legend>Property Details</legend>
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyType, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.PropertyType, Model.PropertyTypeList, new { @class = "form-control"} )
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                
+                <div class="form-group">
+                    <label>Property Details</label>
+                    @Html.DropDownListFor(model => model.PropertyTypeId, new SelectList(Model.PropertyTypeList, "Value", "Text"), new { @class = "form-control", @placeholder = "Property Type" })
+                    @Html.ValidationMessageFor(model => model.PropertyTypeId, "", new { @class = "text-danger" })
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
                     @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
                 </div>
             </div>
-        </fieldset>
+        }
     </div>
-}

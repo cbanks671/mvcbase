@@ -25,6 +25,7 @@ namespace MvcBase.Model.Models
         public int CompanyId { get; set; }
         public virtual Company Company { get; set; }
         public virtual PropertyListType PropertyListType { get; set; }
+        public int PropertyTypeId { get; set; }
         public virtual PropertyType PropertyType { get; set; }
         public virtual PropertySubType PropertySubType { get; set; }
     }

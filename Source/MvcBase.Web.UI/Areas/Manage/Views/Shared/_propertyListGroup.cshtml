@@ -1,0 +1,8 @@
+﻿<div class="col-md-3">
+    <ul class="nav nav-pills nav-stacked">
+        <li class="@ViewBag.NavProperty">@Html.ActionLink("Property", "Edit", "Property", new { @id = Model.Id }, null)</li>
+        <li class="@ViewBag.NavPropertySpace">@Html.ActionLink("Property Space", "Index", "PropertySpace", new { @id = Model.Id }, null)</li>
+        <li><a href="#">Property Features</a></li>
+        <li><a href="#">Media Attachments</a></li>
+    </ul>
+</div>

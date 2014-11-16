@@ -177,6 +177,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Manage\Controllers\PropertySpaceController.cs" />
     <Compile Include="Areas\Setting\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Setting\Controllers\CompanyController.cs" />
     <Compile Include="Areas\Setting\Controllers\UserController.cs" />
@@ -200,7 +201,9 @@
     <Compile Include="ViewModels\CompanyListViewModel.cs" />
     <Compile Include="ViewModels\CompanyViewModel.cs" />
     <Compile Include="ViewModels\FlashViewModels.cs" />
+    <Compile Include="ViewModels\PropertySpaceFormViewModel.cs" />
     <Compile Include="ViewModels\PropertyFormViewModel.cs" />
+    <Compile Include="ViewModels\PropertySpaceListViewModel.cs" />
     <Compile Include="ViewModels\PropertyListViewModel.cs" />
     <Compile Include="ViewModels\UserProfileFormModel.cs" />
     <Compile Include="ViewModels\UserProfileListViewModel.cs" />
@@ -229,6 +232,10 @@
     <Content Include="Areas\Manage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Manage\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Manage\Views\Property\ListType.cshtml" />
+    <Content Include="Areas\Manage\Views\PropertySpace\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\PropertySpace\Create.cshtml" />
+    <Content Include="Areas\Manage\Views\Shared\_twoColumnTitle.cshtml" />
+    <Content Include="Areas\Manage\Views\Shared\_propertyListGroup.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

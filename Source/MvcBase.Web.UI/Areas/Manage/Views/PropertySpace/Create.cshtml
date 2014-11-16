@@ -1,0 +1,126 @@
+﻿@model MvcBase.Web.ViewModels.PropertySpaceFormViewModel
+
+@{
+    ViewBag.Title = "Property Space Setup";
+    ViewBag.NavPropertySpace = "active";
+}
+
+@{ Html.RenderPartial("_twoColumnTitle");  }
+@{ Html.RenderPartial("_propertyListGroup");  }
+
+<div class="col-md-9">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label>Space Description</label>
+                    @Html.EditorFor(model => model.Suite, new { htmlAttributes = new { @class = "form-control", @placeholder = "Suite" } })
+                    @Html.ValidationMessageFor(model => model.Suite, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.TextAreaFor(model => model.Description, 3, 3, new { @class = "form-control", @placeholder = "Description" })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Floor)
+                    @Html.EditorFor(model => model.Floor, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Floor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TotalSpaceAvailable)
+                    @Html.EditorFor(model => model.TotalSpaceAvailable, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TotalSpaceAvailable, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3 col-md-offset-1">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MinDivisible)
+                    @Html.EditorFor(model => model.MinDivisible, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MinDivisible, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3 col-md-offset-1">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MaxContiguous)
+                    @Html.EditorFor(model => model.MaxContiguous, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MaxContiguous, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BuildingSize)
+                    @Html.EditorFor(model => model.BuildingSize, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.BuildingSize, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-3 col-md-offset-1">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.YearBuilt)
+                    @Html.EditorFor(model => model.YearBuilt, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.YearBuilt, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DateAvailable)
+                    @Html.EditorFor(model => model.DateAvailable, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DateAvailable, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LeaseRate)
+                    @Html.EditorFor(model => model.LeaseRate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LeaseRate, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Price)
+                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.HidePrice)
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.HidePrice)
+                        @Html.ValidationMessageFor(model => model.HidePrice, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Cancel", "Index", new { @id = Model.PropertyId }, new { @class = "btn btn-default" })
+        </div>
+    </div>
+    }
+</div>

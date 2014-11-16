@@ -49,7 +49,7 @@
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Enums.cs" />
-    <Compile Include="Models\PropertyFeature.cs" />
+    <Compile Include="Models\PropertySpaceFeature.cs" />
     <Compile Include="Models\Property.cs" />
     <Compile Include="Models\BuildingClass.cs" />
     <Compile Include="Models\PropertySpace.cs" />

@@ -89,7 +89,7 @@ namespace MvcBase.Web.UI.Areas.Manage.Controllers
             {
                 propertyService.CreateProperty(property);
                 TempData.Add("flash", new FlashSuccessViewModel("Your property details have been created successfully."));
-                return RedirectToAction("Details", new { id = property.Id });
+                return RedirectToAction("Edit", new { id = property.Id });
             }
             else
             {
@@ -99,7 +99,7 @@ namespace MvcBase.Web.UI.Areas.Manage.Controllers
         }
 
         // GET: Admin/Property/Detail/5
-        public ActionResult Details(int id)
+        public ActionResult Edit(int id)
         {
             var property = propertyService.GetProperty(id);
             var propertyDetail = Mapper.Map<Property, PropertyFormViewModel>(property);
@@ -109,7 +109,35 @@ namespace MvcBase.Web.UI.Areas.Manage.Controllers
                 return HttpNotFound();
             }
 
-            return View(propertyDetail);
+            propertyDetail.PropertyTypeList = new List<SelectListItem>();
+            IEnumerable<PropertyType> propertyType = propertyTypeService.GetPropertyTypes();
+            propertyDetail.PropertyTypeList = from pt in propertyType
+                                              select new SelectListItem
+                                              {
+                                                  Text = pt.Name.ToString(),
+                                                  Value = pt.Id.ToString()
+                                              };
+
+            return View("Create", propertyDetail);
+        }
+
+        // POST: Admin/Customer/Create
+        [HttpPost]
+        public ActionResult Edit(PropertyFormViewModel editProperty)
+        {
+            var property = Mapper.Map<PropertyFormViewModel, Property>(editProperty);
+
+            if (ModelState.IsValid)
+            {
+                propertyService.UpdateProperty(property);
+                TempData.Add("flash", new FlashSuccessViewModel("Your property details have been saved successfully."));
+                return RedirectToAction("Edit", new { id = property.Id });
+            }
+            else
+            {
+                TempData.Add("flash", new FlashDangerViewModel("There was an error saving property"));
+            }
+            return View(editProperty);
         }
     }
 }

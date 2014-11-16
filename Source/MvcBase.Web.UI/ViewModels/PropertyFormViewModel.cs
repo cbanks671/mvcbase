@@ -11,8 +11,6 @@ namespace MvcBase.Web.ViewModels
     public class PropertyFormViewModel
     {
         public int Id { get; set; }
-        public DateTime DateCreated { get; set; }
-        public DateTime DateEdited { get; set; }
         [Required(ErrorMessage="Please enter a property name")]
         public string Name { get; set; }
         public string Description { get; set; }
@@ -26,7 +24,8 @@ namespace MvcBase.Web.ViewModels
         [Required(ErrorMessage = "Please enter a zip code")]
         public double? ZipCode { get; set; }
         public PropertyListType PropertyListType { get; set; }
-        public virtual PropertyType PropertyType { get; set; }
+        [Display(Name = "Property Type")]
+        public virtual int PropertyTypeId { get; set; }
         public virtual PropertySubType PropertySubType { get; set; }
         public int CompanyId { get; set; }
 

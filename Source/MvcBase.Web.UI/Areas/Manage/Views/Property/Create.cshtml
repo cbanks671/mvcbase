@@ -1,8 +1,21 @@
 ﻿@model MvcBase.Web.ViewModels.PropertyFormViewModel
 
 @{
-    ViewBag.Title = @ViewBag.PropertyListType + " Property Setup";
-    ViewBag.NavProperty = "active";
+    ViewBag.Title = "Property Setup";
+    ViewBag.PropertyId = Model.Id;
+    
+    if (Model.Id == 0)
+    {
+        ViewBag.NavProperty = "disabled";
+        ViewBag.NavPropertySpace = "disabled";
+    }
+    else
+    {
+        ViewBag.NavProperty = "active";
+    }
+    
+    ViewBag.NavFeatures = "disabled";
+    ViewBag.NavMedia = "disabled";
 }
 
     @{ Html.RenderPartial("_twoColumnTitle");  }
@@ -15,58 +28,62 @@
             @Html.HiddenFor(model => model.Id)
             @Html.HiddenFor(model => model.CompanyId)
             @Html.HiddenFor(model => model.PropertyListType)
-            <div class="form-horizontal">
-                
-                <div class="form-group">
-                    <label>About Property</label>
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-horizontal">
 
-                <div class="form-group">
-                    @Html.TextAreaFor(model => model.Description, 3, 3, new { @class = "form-control", @placeholder = "Description" })
-                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                </div>
-                
-                <div class="form-group">
-                    <label>Property Location</label>
-                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Street" } })
-                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-                </div>
+            <div class="form-group">
+                <label>About Property</label>
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
 
-                <div class="form-group">
-                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
-                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control", @placeholder = "State" } })
-                            @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-5 col-md-offset-2">
-                        <div class="form-group">
-                            @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Zip Code" } })
-                            @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
-                        </div>
+            <div class="form-group">
+                @Html.TextAreaFor(model => model.Description, 3, 3, new { @class = "form-control", @placeholder = "Description" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <label>Property Location</label>
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Street" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control", @placeholder = "State" } })
+                        @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="form-group">
-                    @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control", @placeholder = "Country" } })
-                    @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
-                </div>
-                
-                <div class="form-group">
-                    <label>Property Details</label>
-                    @Html.DropDownListFor(model => model.PropertyTypeId, new SelectList(Model.PropertyTypeList, "Value", "Text"), new { @class = "form-control", @placeholder = "Property Type" })
-                    @Html.ValidationMessageFor(model => model.PropertyTypeId, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+                <div class="col-md-5 col-md-offset-2">
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Zip Code" } })
+                        @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
+            <div class="form-group">
+                @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control", @placeholder = "Country" } })
+                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Property Details</label>
+                        @Html.DropDownListFor(model => model.PropertyTypeId, new SelectList(Model.PropertyTypeList, "Value", "Text"), new { @class = "form-control", @placeholder = "Property Type" })
+                        @Html.ValidationMessageFor(model => model.PropertyTypeId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
         }
     </div>

@@ -57,6 +57,7 @@ namespace MvcBase.Web.UI.Areas.Manage.Controllers
             
             var createPropertySpace = new PropertySpaceFormViewModel();
             createPropertySpace.PropertyId = id;
+            ViewBag.PropertyListType = property.PropertyListType;
 
             return View(createPropertySpace);
         }
@@ -91,7 +92,28 @@ namespace MvcBase.Web.UI.Areas.Manage.Controllers
                 return HttpNotFound();
             }
 
+            ViewBag.PropertyListType = propertySpace.Property.PropertyListType;
+
             return View("Create", propertySpaceEdit);
+        }
+
+        // POST: Admin/Customer/Create
+        [HttpPost]
+        public ActionResult Edit(PropertySpaceFormViewModel editPropertySpace)
+        {
+            var propertySpace = Mapper.Map<PropertySpaceFormViewModel, PropertySpace>(editPropertySpace);
+
+            if (ModelState.IsValid)
+            {
+                propertySpaceService.UpdatePropertySpace(propertySpace);
+                TempData.Add("flash", new FlashSuccessViewModel("Your property space has been saved successfully."));
+                return RedirectToAction("Edit", new { id = propertySpace.Id });
+            }
+            else
+            {
+                TempData.Add("flash", new FlashDangerViewModel("There was an error saving property"));
+            }
+            return View(editPropertySpace);
         }
     }
 }

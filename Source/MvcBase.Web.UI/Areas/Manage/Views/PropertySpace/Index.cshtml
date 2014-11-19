@@ -27,7 +27,8 @@
         <th>
             @Html.DisplayNameFor(model => model.DateAvailable)
         </th>
-        <th></th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
     
 @foreach (var item in Model) {
@@ -48,9 +49,20 @@
             @Html.DisplayFor(modelItem => item.DateAvailable)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            <p>
+                <a href="@Url.Action("Edit", new { id = item.Id })">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                    <span class="sr-only">Edit</span>
+                </a>
+            </p>
+        </td>
+        <td>
+            <p>
+                <a href="@Url.Action("Delete", new { id = item.Id })">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span class="sr-only">Delete</span>
+                </a>
+            </p>
         </td>
     </tr>
 }

@@ -2,7 +2,11 @@
 
 @{
     ViewBag.Title = "Property Space Setup";
+    ViewBag.PropertyId = Model.PropertyId;
+    ViewBag.PropertySpaceId = Model.Id;
     ViewBag.NavPropertySpace = "active";
+    ViewBag.NavFeatures = "disabled";
+    ViewBag.NavMedia = "disabled";
 }
 
 @{ Html.RenderPartial("_twoColumnTitle");  }
@@ -12,7 +16,7 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
+        @Html.HiddenFor(model => model.PropertyId)
         <div class="form-horizontal">
         
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })

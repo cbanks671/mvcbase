@@ -102,23 +102,25 @@ namespace MvcBase.Web.UI.Areas.Manage.Controllers
         public ActionResult Edit(int id)
         {
             var property = propertyService.GetProperty(id);
-            var propertyDetail = Mapper.Map<Property, PropertyFormViewModel>(property);
+            var propertyEdit = Mapper.Map<Property, PropertyFormViewModel>(property);
 
             if (property == null)
             {
                 return HttpNotFound();
             }
 
-            propertyDetail.PropertyTypeList = new List<SelectListItem>();
+            propertyEdit.PropertyTypeList = new List<SelectListItem>();
             IEnumerable<PropertyType> propertyType = propertyTypeService.GetPropertyTypes();
-            propertyDetail.PropertyTypeList = from pt in propertyType
+            propertyEdit.PropertyTypeList = from pt in propertyType
                                               select new SelectListItem
                                               {
                                                   Text = pt.Name.ToString(),
                                                   Value = pt.Id.ToString()
                                               };
 
-            return View("Create", propertyDetail);
+            ViewBag.PropertyListType = property.PropertyListType;
+
+            return View("Create", propertyEdit);
         }
 
         // POST: Admin/Customer/Create

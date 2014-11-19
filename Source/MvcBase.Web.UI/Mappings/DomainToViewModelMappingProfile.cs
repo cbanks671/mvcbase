@@ -26,6 +26,8 @@ namespace MvcBase.Mappings
             Mapper.CreateMap<Company, CompanyFormViewModel>();
             Mapper.CreateMap<Property, PropertyFormViewModel>();
             Mapper.CreateMap<Property, PropertyListViewModel>();
+            Mapper.CreateMap<PropertySpace, PropertySpaceFormViewModel>();
+            Mapper.CreateMap<PropertySpace, PropertySpaceListViewModel>();
         }
     }
 }

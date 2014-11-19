@@ -23,6 +23,8 @@ namespace MvcBase.Mappings
             Mapper.CreateMap<CompanyFormViewModel, Company>();
             Mapper.CreateMap<PropertyFormViewModel, Property>();
             Mapper.CreateMap<PropertyListViewModel, Property>();
+            Mapper.CreateMap<PropertySpaceFormViewModel, PropertySpace>();
+            Mapper.CreateMap<PropertySpaceListViewModel, PropertySpace>();
         }
     }
 }

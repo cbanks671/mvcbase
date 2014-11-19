@@ -11,6 +11,7 @@ namespace MvcBase.Model.Models
     {
         public PropertySpace()
         {
+            DateCreated = DateTime.Now;
             DateEdited = DateTime.Now;
         }
         [Key]
